@@ -1,0 +1,39 @@
+; Konfiguracja serwera dedykowanego War of Steam (KAN-183).
+; Na serwerze: /etc/warofsteam/serwer.cfg. Po zmianie: sudo systemctl restart warofsteam
+; (restart rozłącza graczy – najlepiej, gdy nikt nie gra).
+
+[serwer]
+; nazwa widoczna u graczy (lewy górny róg w bitwie)
+nazwa="Serwer testowy War of Steam"
+; port UDP – musi być otwarty w zaporze
+port=7777
+; jedna mapa: "Wielkie Miasto nad Rzeką", "Miasto nad Rzeką", "Dolina Kominów", "Poligon"
+mapa="Wielkie Miasto nad Rzeką"
+; wielkość drużyny (gracze + boty), 1–10
+druzyna=10
+; odliczanie przed bitwą (s) – pusty serwer stoi w odliczaniu, aż ktoś dołączy
+przygotowanie=30
+; długość bitwy (s)
+czas_bitwy=600
+; ile sekund od startu bitwy nowy gracz dostaje jeszcze statek (później czeka na następną bitwę)
+dolaczanie=60
+; przerwa między bitwami (s)
+przerwa=20
+; ile razy na sekundę serwer liczy grę
+klatki=60
+
+[pogoda]
+; "losowo", "dzien", "wieczor", "noc"
+pora="losowo"
+; "losowo" (co czwarta bitwa), "tak", "nie"
+deszcz="losowo"
+
+[aktualizacja]
+; plik wersji pobierany przez aktualizuj.sh – gdy wskazuje nowszą grę, serwer po bitwie kończy pracę,
+; a systemd uruchamia go z nową wersją
+plik_wersji="/opt/warofsteam/gra/wersja.json"
+
+[konta]
+; plik kont graczy – zakładanie: sudo warofsteam-konta dodaj NICK (wypisuje hasło)
+; pusty ("") – bez logowania, wejdzie każdy z aktualną grą
+plik="/etc/warofsteam/konta.json"
