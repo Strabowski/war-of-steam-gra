@@ -1,0 +1,16 @@
+# Pobranie nowej wersji gry dla serwera (KAN-183) – uruchamia go warofsteam-aktualizacja.timer.
+[Unit]
+Description=War of Steam – aktualizacja gry na serwerze
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=warofsteam
+Group=warofsteam
+ExecStart=/opt/warofsteam/aktualizuj.sh
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/opt/warofsteam/gra /opt/warofsteam/godot

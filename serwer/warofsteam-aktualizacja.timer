@@ -1,0 +1,10 @@
+# Co 5 minut sprawdza, czy jest nowa wersja gry (KAN-183).
+[Unit]
+Description=War of Steam – sprawdzanie nowej wersji gry co 5 min
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=5min
+
+[Install]
+WantedBy=timers.target
