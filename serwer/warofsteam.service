@@ -1,0 +1,27 @@
+# Serwer dedykowany War of Steam (KAN-183). Instaluje go server/instaluj.sh.
+#   sudo systemctl status warofsteam      – stan
+#   journalctl -u warofsteam -f            – dziennik na żywo
+#   sudo systemctl restart warofsteam      – restart (rozłącza graczy)
+[Unit]
+Description=War of Steam – serwer gry
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=warofsteam
+Group=warofsteam
+WorkingDirectory=/var/lib/warofsteam
+ExecStart=/opt/warofsteam/godot/godot --headless --main-pack /opt/warofsteam/gra/aktualna.pck res://server/serwer.tscn -- --config=/etc/warofsteam/serwer.cfg
+Restart=always
+RestartSec=3
+TimeoutStopSec=10
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/warofsteam
+ReadOnlyPaths=/opt/warofsteam /etc/warofsteam
+
+[Install]
+WantedBy=multi-user.target

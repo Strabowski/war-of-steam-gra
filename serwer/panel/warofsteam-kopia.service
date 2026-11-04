@@ -1,0 +1,11 @@
+# War of Steam – codzienna kopia panelu i porządki w danych (KAN-212). Uruchamia ją warofsteam-kopia.timer.
+#   kopia:  /var/lib/warofsteam-panel/kopie/kopia-RRRR-MM-DD_HHMM.tar.gz (baza panelu, sterowanie, statystyki; 14 ostatnich)
+#   RODO:   adresy IP usuwane ze zdarzeń starszych niż 90 dni
+#   ręcznie: sudo systemctl start warofsteam-kopia   ·   journalctl -u warofsteam-kopia
+[Unit]
+Description=War of Steam – kopia panelu i porządki w danych
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/warofsteam-panel kopia
+ExecStart=/usr/sbin/runuser -u warofsteam -- /usr/bin/python3 /opt/warofsteam/panel/statystyki.py anonimizuj 90 /var/lib/warofsteam/statystyki

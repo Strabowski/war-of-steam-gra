@@ -1,0 +1,26 @@
+# Panel www War of Steam (KAN-209) – za nginx (HTTPS), słucha tylko na 127.0.0.1:8090. Instaluje go server/instaluj.sh.
+#   sudo systemctl status warofsteam-panel   ·   journalctl -u warofsteam-panel -f
+[Unit]
+Description=War of Steam – panel www
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=wospanel
+Group=wospanel
+SupplementaryGroups=warofsteam
+UMask=0027
+WorkingDirectory=/var/lib/warofsteam-panel
+ExecStart=/usr/bin/python3 /opt/warofsteam/panel/wos_panel.py --config=/etc/warofsteam/panel.cfg serwuj
+Restart=always
+RestartSec=3
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/warofsteam-panel /var/lib/warofsteam/konta /var/lib/warofsteam/sterowanie
+ReadOnlyPaths=/opt/warofsteam /etc/warofsteam /var/lib/warofsteam/statystyki
+
+[Install]
+WantedBy=multi-user.target

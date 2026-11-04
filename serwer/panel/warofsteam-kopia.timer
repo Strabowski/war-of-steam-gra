@@ -1,0 +1,10 @@
+# Codziennie w nocy (KAN-212); Persistent – nadrabia, gdy serwer był wyłączony.
+[Unit]
+Description=War of Steam – codzienna kopia panelu
+
+[Timer]
+OnCalendar=*-*-* 03:17
+Persistent=true
+
+[Install]
+WantedBy=timers.target
